@@ -6,30 +6,30 @@ import { Postagem } from '../../postagem/entities/postagem.entity';
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
-  @ApiProperty({ example: 'Mariana Muniz' })
+  @ApiProperty()
   nome: string;
 
   @IsEmail()
-  @IsNotEmpty()
   @Column({ length: 255, nullable: false })
   @ApiProperty({ example: 'email@email.com.br' })
   usuario: string;
 
-  @MinLength(8)
   @IsNotEmpty()
+  @MinLength(8)
   @Column({ length: 255, nullable: false })
-  @ApiProperty({ example: 'Minimo 8 caracteres' })
+  @ApiProperty()
   senha: string;
 
   @Column({ length: 5000 })
-  @ApiProperty({ example: '' })
+  @ApiProperty()
   foto: string;
 
-  @OneToMany(() => Postagem, (postagem) => postagem.usuario)
   @ApiProperty()
+  @OneToMany(() => Postagem, (postagem) => postagem.usuario)
   postagem: Postagem[];
 }
