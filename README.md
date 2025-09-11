@@ -1,65 +1,59 @@
-# Backend Blog Pessoal
+# Backend do Blog Pessoal
 
-Este é o repositório do **backend** do meu blog.  
-A aplicação foi desenvolvida para gerir artigos, categorias, utilizadores e comentários, fornecendo uma API RESTful.  
+Este é o repositório do backend do meu blog pessoal, desenvolvido em **NestJS** com autenticação segura e documentação via Swagger.
 
 ---
 
 ## Tecnologias Utilizadas
-- **Node.js** com **Express**
-- **MongoDB** com Mongoose (ou PostgreSQL, caso alterado)
-- **JWT (JSON Web Tokens)** para autenticação
-- **bcrypt** para hashing de passwords
-- **Dotenv** para variáveis de ambiente
+- Node.js + NestJS  
+- Express  
+- TypeORM (MySQL, PostgreSQL, SQLite)  
+- Passport + JWT  
+- bcrypt para hashing de passwords  
+- class-validator / class-transformer  
+- Swagger (documentação da API)  
+- ESLint + Prettier  
+- Jest + Supertest  
+- TypeScript  
 
 ---
 
 ## Segurança da API
-A segurança é uma prioridade neste projeto. Foram aplicadas as seguintes práticas:
 
-### Autenticação JWT
-- Todas as rotas privadas requerem um token JWT válido.  
-- Tokens têm tempo de expiração configurado para reduzir riscos.  
+Autenticação JWT com expiração configurada
 
-### Hashing de Passwords
-- Passwords são encriptadas com bcrypt antes de serem guardadas na base de dados.  
+Hashing de passwords com bcrypt
 
-### Validação de Dados
-- Uso de middlewares para sanitizar inputs e evitar:
-  - SQL Injection
-  - NoSQL Injection
-- Todos os campos obrigatórios são validados antes de processar requisições.  
+Validação e sanitização de dados (evita SQL/NoSQL Injection)
 
-### Proteções Adicionais
-- `helmet` → reforça cabeçalhos HTTP.  
-- `express-rate-limit` → protege contra ataques de força bruta.  
+Helmet para reforço de cabeçalhos HTTP
 
-### CORS Configurado
-- Apenas domínios autorizados podem consumir a API.  
+Rate limiting contra ataques de força bruta
 
-### Variáveis de Ambiente
-- Credenciais e chaves secretas não ficam no código.  
-- Arquivo `.env` é usado para configurar um ambiente seguro.  
+CORS restrito a domínios autorizados
 
----
+Variáveis de ambiente para segredos e credenciais
 
 ## Rotas Principais
-### Autenticação
-- `POST /auth/register` → Registar utilizador  
-- `POST /auth/login` → Autenticar utilizador e gerar token  
 
-### Posts
-- `GET /posts` → Listar artigos públicos  
-- `POST /posts` → Criar artigo (apenas utilizadores autenticados)  
-- `PUT /posts/:id` → Atualizar artigo  
-- `DELETE /posts/:id` → Apagar artigo  
+POST /auth/register → Registar utilizador
 
----
+POST /auth/login → Autenticar utilizador
+
+GET /posts → Listar artigos
+
+POST /posts → Criar artigo (autenticado)
+
+PUT /posts/:id → Atualizar artigo
+
+DELETE /posts/:id → Apagar artigo
 
 ## Boas Práticas de Deploy
-- Usar HTTPS (TLS) em produção.  
-- Configurar variáveis de ambiente em servidores (ex: Docker, Heroku, VPS).  
-- Monitorizar logs e tráfego com ferramentas como PM2 ou NGINX.  
-- Realizar backups regulares da base de dados.  
 
-Realizar backups regulares da base de dados.
+Usar HTTPS (TLS)
+
+Configurar variáveis de ambiente no servidor
+
+Monitorizar com PM2/NGINX
+
+Backups regulares da base de dados
